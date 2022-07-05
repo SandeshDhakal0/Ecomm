@@ -1,0 +1,15 @@
+MVC Pattern
+
+    RAD 
+        MVC
+            Model View Controller
+
+            Client - req generator
+            Server - Responder
+
+VIEW ==============> HTML Representation
+
+https://facebook.com
+
+url redirect
+
