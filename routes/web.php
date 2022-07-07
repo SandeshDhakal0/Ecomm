@@ -66,7 +66,7 @@ Route::get('/product/detail/{id}/review/{reviewId}', function($id, $reviewId){
 
 Route::group(['prefix' => '/admin'], function(){
     Route::get('/', function(){
-        echo "Admin Dashboard";
+       return view('admin.dashboard');
 });
 
 Route::group(['prefix' => '/product'], function(){
