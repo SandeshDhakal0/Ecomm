@@ -12,5 +12,11 @@ RUN THE COMMAND
 
     php artisan up
     
+To run the source code of laravel (Configure the server)
 
+    composer install
+    composer update
+    copy .env.example to .env
+    php artisan key:generate
+    
 
