@@ -14,26 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/about-us', function () {
-    return view('aboutus');
-});
+Route::get('/', function () {
+    return view('welcome');
+})->name('landing');
 
 
 //http://127.0.0.1:8000/about-us
 Route::get('/about-us', function(){
-    
-     ddd("test about us");
+    //load view
+     return view('aboutus');
     // echo "Test about us";
-});
+})->name('about-us');
 
 //plain route
 Route::get("/contact", function(){
     echo "Contact Page";
-});
+})->name("contact");
 
 Route::get('/product/detail/{id}', function($id){
     echo $id;
 })->name('product-detail');
+
+Route::get('/product/detail/{id}/review/{reviewId}', function($id, $reviewId){
+    echo $id;
+})->name('product-review');
 
 //named route
     //name cannot be null
