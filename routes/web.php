@@ -28,7 +28,7 @@ Route::get('/about-us', function(){
 
 //plain route
 Route::get("/contact", function(){
-    echo "Contact Page";
+    return view('contact-us');
 })->name("contact");
 
 Route::get('/product/detail/{id}', function($id){
