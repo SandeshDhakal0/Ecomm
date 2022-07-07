@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/about-us', function () {
+    return view('aboutus');
 });
 
 
@@ -27,6 +27,20 @@ Route::get('/about-us', function(){
 });
 
 //plain route
+Route::get("/contact", function(){
+    echo "Contact Page";
+});
+
+Route::get('/product/detail/{id}', function($id){
+    echo $id;
+})->name('product-detail');
+
+//named route
+    //name cannot be null
+    //name should be unique
+    //route name can only be alphanumerical with either _ or - as special characters
+
+    
 
 // Route::get(url,action);            =>Fetch data
 // Route::post(url,action);           =>To store or create a data
@@ -42,3 +56,31 @@ Route::get('/about-us', function(){
 // Route::put('/admin');
 // Route::any();
 // Route::domain();
+
+
+// Grouped Routes
+
+Route::group(['prefix' => '/admin'], function(){
+    Route::get('/', function(){
+        echo "Admin Dashboard";
+});
+
+Route::group(['prefix' => '/product'], function(){
+    Route::get('/', function(){
+        echo "list all products";
+    });
+    });
+});
+
+Route::group(['prefix' => '/seller'], function(){
+    Route::get('/', function(){
+        echo "Seller Dashboard";
+    });
+
+    Route::group(['prefix' => '/product'], function(){
+        Route::get('/', function(){
+            echo "list all prodcut";
+        });
+    });
+});
+
