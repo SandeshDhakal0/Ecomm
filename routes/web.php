@@ -35,56 +35,55 @@ Route::get('/product/detail/{id}', function($id){
     echo $id;
 })->name('product-detail');
 
-Route::get('/product/detail/{id}/review/{reviewId}', function($id, $reviewId){
-    echo $id;
-})->name('product-review');
+//Route::get('/product/detail/{id}/review/{reviewId}', function($id, $reviewId){
+//    echo $id;
+//})->name('product-review');
 
 //named route
     //name cannot be null
     //name should be unique
     //route name can only be alphanumerical with either _ or - as special characters
 
-    
+                                    // Grouped Routes
+    Route::group(['prefix' => '/admin', 'namespace' => '\App\Http\Controllers'], function() {
 
-// Route::get(url,action);            =>Fetch data
-// Route::post(url,action);           =>To store or create a data
-// Route::put(url,action);               =>To update a data in db
-// Route::patch(url,action);          =>To update a data
-// Route::delete(url,action);         => To delete any data in db
-// Route::match([],url,action);          => To call the url on defined methods
-// Route::any(url,action);            => To call the action on any method
-// Route::resources(controller);
+        //Simple controller
+        Route::get('/category', 'CategoryController@getCategories')->name('category.index');
+        Route::get('/category/{id}', 'CategoryController@showDetail')->name('category.show');
+        //Single Invokable Controller
+        Route::get('/', 'AdminController')->name('admin');
 
-// Route::match(['patch', 'put'],'/admin');
-// Route::patch('/admin');
-// Route::put('/admin');
-// Route::any();
-// Route::domain();
+        //Resource Controller
+        /***
+         *   Category CRUD
+         * URL                      Action                      Method    Name                Description
+         * a./category =>           ProductController@index    get       category.index      Get all categories
+         * b. /category/create      CategoryController@create   get       category.create     Open add form
+         * c./category/             CategoryController@store    post      category.store      Submit category data
+         * d./category/{id}         CategoryController@show     get       category.show       Detail of a category
+         * e./category{id}/edit    CategoryController@edit      get       category.edit       Open a form to edit
+         * f./category/{id}         CategoryController@update   put/patch category.upaate     Update the category
+         * g. /category/{id}        CategoryController@destroy  delete    category.destroy    Delete the category
+         *
+         */
+
+        Route::resource('product', 'ProductController');
 
 
-// Grouped Routes
+        Route::group(['prefix' => '/seller'], function () {
+            Route::get('/', function () {
+                echo "Seller Dashboard";
+            });
 
-Route::group(['prefix' => '/admin'], function(){
-    Route::get('/', function(){
-       return view('admin.dashboard');
-});
-
-Route::group(['prefix' => '/product'], function(){
-    Route::get('/', function(){
-        echo "list all products";
-    });
-    });
-});
-
-Route::group(['prefix' => '/seller'], function(){
-    Route::get('/', function(){
-        echo "Seller Dashboard";
-    });
-
-    Route::group(['prefix' => '/product'], function(){
-        Route::get('/', function(){
-            echo "list all prodcut";
+            Route::group(['prefix' => '/product'], function () {
+                Route::get('/', function () {
+                    echo "list all prodcut";
+                });
+            });
         });
     });
-});
+
+
+
+
 

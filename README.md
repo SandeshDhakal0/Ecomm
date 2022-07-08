@@ -19,4 +19,5 @@ RUN THE COMMAND
     copy .env.example to .env
     php artisan key:generate
 
+php artisan make:controller ProductController --resource
 
