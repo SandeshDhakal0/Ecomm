@@ -98,16 +98,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../../index.html" class="nav-link">
+                            <a href="{{ route('category.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v1</p>
+                                <p>Add Category</p>
                             </a>
                         </li>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('category.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>List Category</p>
+                                </a>
+                            </li>
                     </ul>
                 </li>
             </ul>
+            </ul>
         </nav>
         <!-- /.sidebar-menu -->
+
     </div>
     <!-- /.sidebar -->
 </aside>

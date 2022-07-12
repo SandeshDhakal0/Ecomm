@@ -47,11 +47,14 @@ Route::get('/product/detail/{id}', function($id){
                                     // Grouped Routes
     Route::group(['prefix' => '/admin', 'namespace' => '\App\Http\Controllers'], function() {
 
-        //Simple controller
+  //Simple controller
         Route::get('/category', 'CategoryController@getCategories')->name('category.index');
+        Route::get('/category/create','CategoryController@showForm')->name("category.create");
+        Route::post('/category','CategoryController@addCategory')->name("category.store");
         Route::get('/category/{id}', 'CategoryController@showDetail')->name('category.show');
-        //Single Invokable Controller
-        Route::get('/', 'AdminController')->name('admin');
+
+//Single Invokable Controller
+Route::get('/', 'AdminController')->name('admin');
 
         //Resource Controller
         /***
