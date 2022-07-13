@@ -27,12 +27,7 @@
                 <h3 class="card-title">Category Add</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('category.store') }}" method="post">
-                    {{--
-                        CSRF Token,
-                        Cross Site Reference Forgery
-                    --}}
-                    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                 <div class="form-group row mb-3">
@@ -54,6 +49,30 @@
                             <option value="inactive">InActive</option>
                             </select>
                             @error("status")
+                            <span class="text-danger">
+                            {{ $message }}
+                        </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="" class="col-sm-3">Child of: </label>
+                        <div class="col-sm-9">
+                            <select name="parent_id" id="parent_id" class="form-control form-control-sm">
+                                <option value="" selected>-------Select any one--------</option>
+                            </select>
+                            @error("parent_id")
+                            <span class="text-danger">
+                            {{ $message }}
+                        </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="" class="col-sm-3">Image: </label>
+                        <div class="col-sm-9">
+                            <input type="file" class="image" accept="image/*">
+                            @error("parent_id")
                             <span class="text-danger">
                             {{ $message }}
                         </span>

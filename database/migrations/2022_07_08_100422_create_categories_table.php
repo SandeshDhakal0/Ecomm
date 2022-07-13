@@ -26,11 +26,23 @@ class CreateCategoriesTable extends Migration
          * )
          *
          */
+
+    //Parent Category
+        //CHILD CATEGORY
+        //CHILD CATEGORY
+
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+
             $table->string('title',100);
+
+            $table->foreignId('parent_id')->nullable()->constrained('categories','id')->nullOnDelete()->cascadeOnUpdate();
+
             $table->string('slug', 100)->unique();
+
             $table->enum('status',['active','inactive'])->default('inactive');
+
+            $table->string('image',100)->nullable();
 
             $table->foreignId('created_by')->nullable()->constrained('users','id')->nullOnDelete()->cascadeOnUpdate();
 
