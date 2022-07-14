@@ -24,16 +24,22 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Category Add</h3>
+                <h3 class="card-title">Category {{ (isset($detail) ? 'Update' : 'Add') }}</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                //Laravel collective
+                @isset($detail)
+                    {!! Form::open(['url' => route('category.update', $detail->id), 'files'=>true]) !!}
+                    @method('put')
+                @else
+                    {!! Form::open(['url' => route('category.store'), 'files'=>true]) !!}
+                @endisset
 
                 <div class="form-group row mb-3">
                     <label for="" class="col-sm-3">Title: </label>
                     <div class="col-sm-9">
-                        <input type="text" name="title" required placeholder="Enter Category Name" class="form-control form-control-sm">
+                        {{ Form::text('title',@$detail->title,['class'=>'form-control form-control-sm','required'=>true, 'placeholder'=>'Enter Category Name']) }}
+{{-- <input type="text" name="title" required placeholder="Enter Category Name" class="form-control form-control-sm">--}}
                         @error("title")
                         <span class="text-danger">
                             {{ $message }}
@@ -41,13 +47,25 @@
                         @enderror
                     </div>
                 </div>
+
+                    <div class="form-group row mb-3">
+                        <label for="" class="col-sm-3">Child of: </label>
+                        <div class="col-sm-9">
+
+                            {{ Form::select('parent_id',$parent_cats->pluck('title','id'),@$detail->parent_id,['class'=>'form-control form-control-sm', 'id'=>'parent_id', 'placeholder'=>"---Select Any One---"]) }}
+                            @error("parent_id")
+                            <span class="text-danger">
+                            {{ $message }}
+                        </span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="form-group row mb-3">
                         <label for="" class="col-sm-3">Status: </label>
                         <div class="col-sm-9">
-                            <select name="status" id="status" required  class="form-control form-control-sm">
-                            <option value="active">Active</option>
-                            <option value="inactive">InActive</option>
-                            </select>
+                            {{ Form::select('status',['active'=>'Active','inactive'=>'Inactive'],@$detail->status,['class'=>'form-control form-control-sm', 'id'=>'status']) }}
+
                             @error("status")
                             <span class="text-danger">
                             {{ $message }}
@@ -55,24 +73,12 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row mb-3">
-                        <label for="" class="col-sm-3">Child of: </label>
-                        <div class="col-sm-9">
-                            <select name="parent_id" id="parent_id" class="form-control form-control-sm">
-                                <option value="" selected>-------Select any one--------</option>
-                            </select>
-                            @error("parent_id")
-                            <span class="text-danger">
-                            {{ $message }}
-                        </span>
-                            @enderror
-                        </div>
-                    </div>
+
                     <div class="form-group row mb-3">
                         <label for="" class="col-sm-3">Image: </label>
                         <div class="col-sm-9">
-                            <input type="file" class="image" accept="image/*">
-                            @error("parent_id")
+                            {{ Form::file('image',['accept'=>'image/*']) }}
+                            @error("status")
                             <span class="text-danger">
                             {{ $message }}
                         </span>
@@ -91,7 +97,7 @@
                         </div>
                 </div>
                 </div>
-            </form>
+            {{ Form::close() }}
         </div>
     </section>
 @endsection

@@ -20,19 +20,19 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('about-us') }}">About us</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('product-review',[123, 243]) }}">Product Title</a>
-        </li>
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link" href="{{ route('product-review') }}">Product Title</a>--}}
+{{--        </li>--}}
         {{-- Comment --}}
 
-        @auth 
+        @auth
         <li class="nav-item">
             <a href="" class="nav-light">Logout</a>
         </li>
         <li class="nav-item">
             <a class="nav-link disabled">Login</a>
         </li>
-        @endauth 
+        @endauth
         </ul>
         </nav>
     </header>

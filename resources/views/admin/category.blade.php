@@ -30,27 +30,48 @@
                     <thead class="thead-dark">
                     <th>S.N</th>
                     <th>Name</th>
+                    <th>Parent</th>
+                    <th>Slug</th>
                     <th>Status</th>
+                    <th>Created At</th>
                     <th>Action</th>
                     </thead>
                     <tbody>
+                    {{--Json Value--}}
                     @foreach($category as $key => $row)
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $row['name'] }}</td>
+                            <td>{{ $row['title'] }}</td>
+                            <td>
+                                {{ @$row->parentInfo->title }}
+                            </td>
+                            <td>
+                                <a href="">
+                                    {{ route('category.show',$row->slug) }}
+                                </a>
+                            </td>
                             <td>{{ $row['status'] }}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-success img-circle">
+                                {{ $row->created_at }}
+                            </td>
+                            <td>
+                                <a href="{{ route('category.edit', $row->id) }}" class="btn btn-sm btn-success img-circle">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <a href="" class="btn btn-sm btn-danger img-circle">
+                                <a href="javascript:;"  class="btn btn-sm btn-danger img-circle delete_btn">
                                     <i class="fa fa-trash"></i>
                                 </a>
+                                <form class="delete_form" action="{{ route('category.delete',$row->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                </form>
+
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+{{--                {{ $category->links() }}  //for using paginate--}}
             </div>
         </div>
     </section>

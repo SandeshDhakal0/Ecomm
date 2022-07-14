@@ -51,7 +51,11 @@ Route::get('/product/detail/{id}', function($id){
         Route::get('/category', 'CategoryController@getCategories')->name('category.index');
         Route::get('/category/create','CategoryController@showForm')->name("category.create");
         Route::post('/category','CategoryController@addCategory')->name("category.store");
+        Route::match(['put','patch'],'/category/{id}','CategoryController@update')->name("category.update");
+
         Route::get('/category/{id}', 'CategoryController@showDetail')->name('category.show');
+        Route::get('/category/{id}/edit', 'CategoryController@edit')->name('category.edit');
+        Route::delete('/category/{id}', 'CategoryController@deleteCategory')->name('category.delete');
 
 //Single Invokable Controller
 Route::get('/', 'AdminController')->name('admin');
