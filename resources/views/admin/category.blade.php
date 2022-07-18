@@ -33,6 +33,7 @@
                     <th>Parent</th>
                     <th>Slug</th>
                     <th>Status</th>
+                    <th>Image</th>
                     <th>Created At</th>
                     <th>Action</th>
                     </thead>
@@ -51,6 +52,7 @@
                                 </a>
                             </td>
                             <td>{{ $row['status'] }}</td>
+                            <td>{{ $row->image }}</td>
                             <td>
                                 {{ $row->created_at }}
                             </td>
