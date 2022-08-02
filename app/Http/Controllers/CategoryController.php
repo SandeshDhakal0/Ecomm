@@ -43,7 +43,7 @@ class CategoryController extends Controller
 
     public function showForm(){
 
-        $all_parents = $this->category->whereNull("parent_id")->get();
+        $all_parents = $this->category->whereNull('parent_id')->get();
         return view('admin.category-form')->with("parent_cats",$all_parents);
     }
 
