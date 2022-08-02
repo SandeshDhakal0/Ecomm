@@ -73,7 +73,6 @@
                     @endforeach
                     </tbody>
                 </table>
-{{--                {{ $category->links() }}  //for using paginate--}}
             </div>
         </div>
     </section>
